@@ -82,8 +82,8 @@ class MainActivity : AppCompatActivity() {
                 Log.d("Profile", result.toString())
             }
 
-            override fun onError(error: String, exception: AuthorizationException) {
-                Log.d("Profile", error, exception.cause)
+            override fun onError(error: String?, exception: AuthorizationException?) {
+                Log.d("Profile", error, exception?.cause)
             }
         })
     }
