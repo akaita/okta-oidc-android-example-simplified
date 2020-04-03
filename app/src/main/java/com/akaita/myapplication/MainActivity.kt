@@ -58,16 +58,19 @@ class MainActivity : AppCompatActivity() {
             fragmentActivity = this,
             onSuccessListener = {
                 Log.d("MainActivity", "Biometric authentication succeeded")
+                Toast.makeText(this, "Biometric authentication succeeded", Toast.LENGTH_SHORT).show()
             },
             onCancelListener = {
                 runOnUiThread {
                     Log.d("MainActivity", "Biometric authentication cancelled")
+                    Toast.makeText(this, "Biometric authentication cancelled", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             },
             onErrorListener = { code, message ->
                 runOnUiThread {
                     Log.d("MainActivity", "Biometric authentication failed")
+                    Toast.makeText(this, "Biometric authentication failed", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }).show()
@@ -91,17 +94,21 @@ class MainActivity : AppCompatActivity() {
                 override fun onSuccess(status: AuthorizationStatus) {
                     if (status == AuthorizationStatus.AUTHORIZED) {
                         Log.d("MainActivity", "AUTHORIZED")
+                        Toast.makeText(this@MainActivity, "Authorized", Toast.LENGTH_SHORT).show()
                     } else if (status == AuthorizationStatus.SIGNED_OUT) {
                         Log.d("MainActivity", "SIGNED_OUT")
+                        Toast.makeText(this@MainActivity, "Signed out", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onCancel() {
                     Log.d("MainActivity", "CANCELED")
+                    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onError(msg: String?, error: AuthorizationException?) {
                     Log.d("MainActivity", "${error?.error} onError", error)
+                    Toast.makeText(this@MainActivity, error?.toJsonString(), Toast.LENGTH_SHORT).show()
                 }
             }
         webAuth.registerCallback(callback, this)
